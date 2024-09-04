@@ -56,6 +56,7 @@ function CreateTrip() {
             <div
               key={index}
               className="p-4 border cursor-pointer rounded-lg hover:shadow-lg"
+              onClick={()=>handleInputChange('budget',item.title)}
             >
               <h2 className="text-4xl">{item?.icon}</h2>
               <h2 className="font-bold text-lg">{item?.title}</h2>
@@ -73,6 +74,7 @@ function CreateTrip() {
             <div
               key={index}
               className="p-4 border cursor-pointer rounded-lg hover:shadow-lg"
+              onClick={()=>handleInputChange('traveles',item.title)}
             >
               <h2 className="text-4xl">{item?.icon}</h2>
               <h2 className="font-bold text-lg">{item?.title}</h2>
