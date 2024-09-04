@@ -3,6 +3,8 @@ import { SelectBudgetOptions, SelectCompanionList } from "@/constants/options";
 import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Button } from "@/components/ui/button";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -13,6 +15,29 @@ function CreateTrip() {
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+  const OnGenerateTrip=()=>{
+    if(formData?.noOfDays>5){
+      toast.warn("Please keep the number of days less than 5.");
+      return;
+    }
+    if(!formData?.location){
+      toast.error("Please Enter the location where you want to travel")
+      return;
+    }
+    if(!formData?.noOfDays){
+      toast.error("Please Enter the duration of the trip")
+      return;
+    }
+    if(!formData?.budget){
+      toast.error("Please Enter the budget details")
+      return;
+    }
+    if(!formData?.traveler){
+      toast.error("Please Enter with whom you are traveling")
+      return;
+    }
+    console.log(formData);
+  }
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-50 px-5 mt-10">
       <h2 className="font-bold text-3xl">
@@ -55,8 +80,10 @@ function CreateTrip() {
           {SelectBudgetOptions.map((item, index) => (
             <div
               key={index}
-              className="p-4 border cursor-pointer rounded-lg hover:shadow-lg"
-              onClick={()=>handleInputChange('budget',item.title)}
+              className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${
+                formData?.budget == item.title && "shadow-lg border-black"
+              }`}
+              onClick={() => handleInputChange("budget", item.title)}
             >
               <h2 className="text-4xl">{item?.icon}</h2>
               <h2 className="font-bold text-lg">{item?.title}</h2>
@@ -73,8 +100,10 @@ function CreateTrip() {
           {SelectCompanionList.map((item, index) => (
             <div
               key={index}
-              className="p-4 border cursor-pointer rounded-lg hover:shadow-lg"
-              onClick={()=>handleInputChange('traveles',item.title)}
+              className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${
+                formData?.traveler == item.title && "shadow-lg border-black"
+              }`}
+              onClick={() => handleInputChange("traveler", item.title)}
             >
               <h2 className="text-4xl">{item?.icon}</h2>
               <h2 className="font-bold text-lg">{item?.title}</h2>
@@ -84,8 +113,9 @@ function CreateTrip() {
         </div>
       </div>
       <div className="my-10 justify-end flex">
-        <Button>Generate Trip</Button>
+        <Button onClick={OnGenerateTrip}>Generate Trip</Button>
       </div>
+      <ToastContainer />
     </div>
   );
 }
