@@ -3,8 +3,7 @@ import { SelectBudgetOptions, SelectCompanionList } from "@/constants/options";
 import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Button } from "@/components/ui/button";
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "sonner";
 
 
 function CreateTrip() {
@@ -18,23 +17,23 @@ function CreateTrip() {
   }, [formData]);
   const OnGenerateTrip=()=>{
     if(formData?.noOfDays>5){
-      toast.warn("Please keep the number of days less than 5.");
+      toast("Please keep the number of days less than 5.");
       return;
     }
     if(!formData?.location){
-      toast.error("Please Enter the location where you want to travel")
+      toast("Please Enter the location where you want to travel")
       return;
     }
     if(!formData?.noOfDays){
-      toast.error("Please Enter the duration of the trip")
+      toast("Please Enter the duration of the trip")
       return;
     }
     if(!formData?.budget){
-      toast.error("Please Enter the budget details")
+      toast("Please Enter the budget details")
       return;
     }
     if(!formData?.traveler){
-      toast.error("Please Enter with whom you are traveling")
+      toast("Please Enter with whom you are traveling")
       return;
     }
     console.log(formData);
@@ -116,7 +115,6 @@ function CreateTrip() {
       <div className="my-10 justify-end flex">
         <Button onClick={OnGenerateTrip}>Generate Trip</Button>
       </div>
-      <ToastContainer />
     </div>
   );
 }
