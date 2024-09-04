@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
