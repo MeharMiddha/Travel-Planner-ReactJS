@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { SelectBudgetOptions, SelectCompanionList } from "@/constants/options";
+import { AI_PROMPT, SelectBudgetOptions, SelectCompanionList } from "@/constants/options";
 import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,15 @@ function CreateTrip() {
       toast("Please Enter with whom you are traveling")
       return;
     }
-    console.log(formData);
+    const FINAL_PROMPT = AI_PROMPT
+    .replace('{location}',formData?.location?.label)
+    .replace('{totalDays}',formData?.noOfDays)
+    .replace('{traveler}',formData?.traveler)
+    .replace('{budget}',formData?.budget)
+    .replace('{totalDays}',formData?.noOfDays);
+
+    console.log(FINAL_PROMPT);
+    
   }
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-50 px-5 mt-10">
